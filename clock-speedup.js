@@ -101,14 +101,20 @@
     if (window.jQuery)
     {
         var $ = window.jQuery;
+        var maxZ = Math.max.apply(null, 
+            $.map($('*'), function(e,n) {
+              return parseInt($(e).css('z-index')) || 0;
+            }));
         var container = $("<div>")
             .css({
                 "position": "absolute",
-                "bottom": "1px",
+                "top": "1px",
                 "padding": "10px",
                 "background": "#eee",
                 "border": "1px solid #999",
-                "left": "1px"
+                "left": "calc(50% - 50px)",
+                "color": "black",
+                "z-index": maxZ+1
             })
             .prop("title", "Use Date.hideUi() to hide this programmatically.");
         var nowDiv = $("<div>")
